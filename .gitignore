@@ -1,1 +1,8 @@
+# Directories
+__pycache__/
+build/
+dist/
+
+# Files
 vlcrc-backup
+switchconfig.spec
