@@ -23,7 +23,8 @@ def main():
 
 @main.command('to')
 @click.argument('config')
-def to(config):
+@click.option('--restart', '-r', is_flag=True, help='Restart VLC after switching')
+def to(config, restart):
     """
     Switch to specified configuration file
     """
@@ -53,12 +54,24 @@ def to(config):
       shutil.copyfile(config, 'C:\\Users\\'+getpass.getuser()+'\\Application Data\\vlc\\vlcrc')
     click.echo('Switched to '+config)
 
+    if restart:
+      click.echo('Restarting VLC')
+      if userSystem == 'Windows':
+        subprocess.call('start vlc', shell=True)
+      elif userSystem == 'Linux':
+        subprocess.call('vlc', shell=True)
+
 @main.command('revert')
-def revert():
+@click.option('--restart', '-r', is_flag=True, help='Restart VLC after reverting')
+def revert(restart):
     """
     Revert to old config
     """
     userSystem = platform.system()
+
+    if not os.path.exists('./vlcrc-backup'):
+      click.echo('No backup found')
+      return
 
     if vlc_running(userSystem):
       click.echo('VLC is running, stopping it')
@@ -76,6 +89,26 @@ def revert():
     
     os.remove('./vlcrc-backup')
     click.echo('Removed backup')
+
+    if restart:
+      click.echo('Restarting VLC')
+      if userSystem == 'Windows':
+        subprocess.call('start vlc', shell=True)
+      elif userSystem == 'Linux':
+        subprocess.call('vlc', shell=True)
+
+@main.command('backup')
+def backup():
+    """
+    Backup current config
+    """
+    userSystem = platform.system()
+
+    if userSystem == 'Linux':
+      shutil.copyfile(os.path.expanduser('~')+'\\.config\\vlc\\vlcrc', './vlcrc-current')
+    elif userSystem == 'Windows':
+      shutil.copyfile('C:\\Users\\'+getpass.getuser()+'\\Application Data\\vlc\\vlcrc', './vlcrc-current')
+    click.echo('Backed up old config to ./vlcrc-current')
 
 if __name__ == '__main__':
     main()
