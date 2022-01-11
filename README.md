@@ -17,7 +17,11 @@ only tested this on Windows currently, but Linux support will be tested soon. Pl
 ### Building (Windows)
 *Note: this is optional, but it makes it easier to run on new Windows devices*
 1. Install pyinstaller via pip
-2. run ``build_exe.bat``
+2. run ``build_win.bat``
+### Building (Linux)
+*Note: you probably don't need this, but it might make it easier for you*
+1. Install pyinstaller via pip
+2. Run ``build_linux.sh``
 
 ## License
 [MIT](LICENSE)

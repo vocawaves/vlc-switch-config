@@ -9,10 +9,10 @@ def vlc_running(userSystem):
     """
     Checks if VLC is running
     """
-    if userSystem == "Windows":
-        return subprocess.call("tasklist | find /I /C \"vlc.exe\"", shell=True) == 0
+    if userSystem == 'Windows':
+        return subprocess.call('tasklist | find /I /C "vlc.exe"', shell=True) == 0
     else:
-        return subprocess.call("ps -A | grep vlc", shell=True) == 0
+        return subprocess.call('ps -A | grep vlc', shell=True) == 0
 
 @click.group()
 def main():
