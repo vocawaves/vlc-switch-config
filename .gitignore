@@ -7,3 +7,4 @@ dist/
 vlcrc-backup
 vlcrc-current
 switchconfig.spec
+vlc-switch-config.spec
