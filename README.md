@@ -2,7 +2,7 @@
 Switch between VLC configurations
 
 ## About
-This is a small Python CLI utility used to switch between configuration files on VLC. This is helpful for if you have one for production and one for testing to show more information. I've only tested this on Windows currently, but Linux support will be tested soon. Please note that custom installations of VLC may not work correctly.
+This is a small Python CLI utility used to switch between configuration files on VLC. This is helpful for if you have one for production and one for testing to show more information. 
 
 ## Installation
 ### Requirements
